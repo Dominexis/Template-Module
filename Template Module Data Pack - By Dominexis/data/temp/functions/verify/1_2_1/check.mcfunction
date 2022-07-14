@@ -37,12 +37,12 @@ execute unless score #module_count nexus.value matches 1 run scoreboard players 
 execute if score #module_count nexus.value matches 000 run tellraw @a ["",{"text":"[","color":"gray"},{"text":"Template Module","color":"gold"},{"text":"]","color":"gray"}," ",{"text":"Error: ","color":"dark_red"},{"text":"Function Tree Library","color":"gold","underlined":true,"hoverEvent":{"action":"show_text","value":[{"text":"Function Tree Library","color":"gold"},{"text":" on ","color":"gray"},{"text":"GitHub","color":"blue"}]},"clickEvent":{"action":"open_url","value":"https://github.com/Dominexis/Function-Tree-Library/releases"}},{"text":" is not installed.","color":"red"}]
 execute if score #module_count nexus.value matches 2.. run tellraw @a ["",{"text":"[","color":"gray"},{"text":"Template Module","color":"gold"},{"text":"]","color":"gray"}," ",{"text":"Error: ","color":"dark_red"},{"text":"Multiple copies of ","color":"red"},{"text":"Function Tree Library","color":"gold"},{"text":" exist. Remove all outdated versions.","color":"red"}]
 
-scoreboard players set #installed_major nexus.value 1
-scoreboard players set #installed_minor nexus.value 0
-scoreboard players set #installed_patch nexus.value 0
 scoreboard players set #expected_major nexus.value 1
 scoreboard players set #expected_minor nexus.value 1
 scoreboard players set #expected_patch nexus.value 0
+scoreboard players set #installed_major nexus.value 1
+scoreboard players set #installed_minor nexus.value 0
+scoreboard players set #installed_patch nexus.value 0
 
 execute if score #module_count nexus.value matches 001 store result score #installed_major nexus.value run data get storage nexus:data modules[{id:"function_tree_library"}].version.major
 execute if score #module_count nexus.value matches 001 store result score #installed_minor nexus.value run data get storage nexus:data modules[{id:"function_tree_library"}].version.minor
