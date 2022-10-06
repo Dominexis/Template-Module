@@ -16,6 +16,7 @@ scoreboard players set #feature_player_respawn nexus.value 1
 scoreboard players set #feature_entity_processing nexus.value 1
 scoreboard players set #feature_custom_entity_ticking nexus.value 1
 scoreboard players set #feature_vehicle nexus.value 1
+scoreboard players set #feature_event_id_phe nexus.value 1
 scoreboard players set #feature_object_ticking nexus.value 1
 execute if score #feature_maximum_entity_time nexus.value matches 45.. run scoreboard players set #feature_maximum_entity_time nexus.value 45
 
