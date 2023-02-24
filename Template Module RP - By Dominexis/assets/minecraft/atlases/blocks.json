@@ -1,0 +1,20 @@
+{
+    "sources": [
+        {
+            "type": "single",
+            "resource": "temp:entity/ball"
+        },
+        {
+            "type": "single",
+            "resource": "temp:entity/racecar"
+        },
+        {
+            "type": "single",
+            "resource": "temp:entity/spider_brain/damage"
+        },
+        {
+            "type": "single",
+            "resource": "temp:entity/spider_brain/main"
+        }
+    ]
+}

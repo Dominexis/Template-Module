@@ -94,8 +94,11 @@ scoreboard players set #damage_amount nexus.value 4000
 scoreboard players set #damage_source nexus.value 999900002
 scoreboard players set #damage_armor_boolean nexus.value 1
 scoreboard players set #damage_burn_boolean nexus.value 0
+scoreboard players set #damage_shield_boolean nexus.value 1
+scoreboard players set #damage_shield_blocked_boolean nexus.value 0
 
 execute if score #previous nexus.anim_time_04 matches ..12 if score @s nexus.anim_time_04 matches 13.. as @a[distance=..3] run function nexus:player/health/damage/verify
+execute if score #previous nexus.anim_time_04 matches ..12 if score @s nexus.anim_time_04 matches 13.. if score #damage_shield_blocked_boolean nexus.value matches 1 run function temp:entity/spider_brain/animate/attack/knock_back
 execute if score #previous nexus.anim_time_04 matches ..12 if score @s nexus.anim_time_04 matches 13.. run playsound minecraft:entity.blaze.hurt hostile @a
 
 

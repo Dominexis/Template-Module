@@ -1,6 +1,43 @@
 {
-	"pack": {
-		"pack_format": 10,
-		"description": "§6§lTemplate Module\n§7By §9Dominexis §7- §61.2.3\n§7Powered by §9Dom's Nexus §61.10.0+"
-	}
+    "pack": {
+        "pack_format": 10,
+        "description": [
+            "",
+            {
+                "text": "Template Module",
+                "color": "gold",
+                "bold": true
+            },
+            "\n",
+            {
+                "text": "By ",
+                "color": "gray"
+            },
+            {
+                "text": "Dominexis",
+                "color": "blue"
+            },
+            {
+                "text": " - ",
+                "color": "gray"
+            },
+            {
+                "text": "1.3.0",
+                "color": "gold"
+            },
+            "\n",
+            {
+                "text": "Powered by ",
+                "color": "gray"
+            },
+            {
+                "text": "Dom's Nexus ",
+                "color": "blue"
+            },
+            {
+                "text": "2.0.0+",
+                "color": "gold"
+            }
+        ]
+    }
 }

@@ -1,2 +1,2 @@
-# Adjust feature booleans for dependencies
+# Adjust custom feature booleans for dependencies
 

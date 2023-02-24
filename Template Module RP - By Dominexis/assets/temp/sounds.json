@@ -1,17 +1,38 @@
 {
-	"entity.racecar.in": {
+	"entity.racecar.internal.in": {
 		"sounds": [
-			"temp:entity/racecar/in"
-		]
+			"temp:entity/racecar/internal/in"
+		],
+        "subtitle": "subtitles.temp.entity.racecar.in"
 	},
-	"entity.racecar.drive": {
+	"entity.racecar.internal.drive": {
 		"sounds": [
-			"temp:entity/racecar/drive"
-		]
+			"temp:entity/racecar/internal/drive"
+		],
+        "subtitle": "subtitles.temp.entity.racecar.drive"
 	},
-	"entity.racecar.out": {
+	"entity.racecar.internal.out": {
 		"sounds": [
-			"temp:entity/racecar/out"
-		]
+			"temp:entity/racecar/internal/out"
+		],
+        "subtitle": "subtitles.temp.entity.racecar.out"
+	},
+    "entity.racecar.external.in": {
+		"sounds": [
+			"temp:entity/racecar/external/in"
+		],
+        "subtitle": "subtitles.temp.entity.racecar.in"
+	},
+	"entity.racecar.external.drive": {
+		"sounds": [
+			"temp:entity/racecar/external/drive"
+		],
+        "subtitle": "subtitles.temp.entity.racecar.drive"
+	},
+	"entity.racecar.external.out": {
+		"sounds": [
+			"temp:entity/racecar/external/out"
+		],
+        "subtitle": "subtitles.temp.entity.racecar.out"
 	}
 }

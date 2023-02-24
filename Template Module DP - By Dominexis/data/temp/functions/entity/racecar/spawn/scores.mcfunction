@@ -47,3 +47,14 @@ scoreboard players set @s nexus.mass 1500
 scoreboard players set @s temp.sound 0
 scoreboard players set @s temp.steer 0
 scoreboard players set @s temp.mot_steer 0
+scoreboard players set @s temp.traction 0
+scoreboard players set @s temp.traction_delta 0
+
+scoreboard players set @s temp.fl_wheel 0
+scoreboard players set @s temp.fr_wheel 0
+scoreboard players set @s temp.bl_wheel 0
+scoreboard players set @s temp.br_wheel 0
+scoreboard players set @s temp.mot_fl_wheel 0
+scoreboard players set @s temp.mot_fr_wheel 0
+scoreboard players set @s temp.mot_bl_wheel 0
+scoreboard players set @s temp.mot_br_wheel 0

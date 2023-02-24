@@ -12,33 +12,36 @@ scoreboard players operation @s nexus.mot_y += #math_00 temp.value
 
 # Move entity along current trajectory
 
+scoreboard players operation #math_00 temp.value = @s nexus.mot_x
+scoreboard players operation #math_01 temp.value = @s nexus.mot_y
+scoreboard players operation #math_02 temp.value = @s nexus.mot_z
+scoreboard players operation #math_00 temp.value *= @s nexus.mot_x
+scoreboard players operation #math_01 temp.value *= @s nexus.mot_y
+scoreboard players operation #math_02 temp.value *= @s nexus.mot_z
+scoreboard players operation #math_00 temp.value += #math_01 temp.value
+scoreboard players operation #math_00 temp.value += #math_02 temp.value
+scoreboard players operation #math_00 temp.value /= #1000 nexus.value
+
 scoreboard players set #hitbox_offset nexus.value 0
 scoreboard players set #hitbox_width nexus.value 375
 scoreboard players set #hitbox_height nexus.value 375
 
-scoreboard players set #collision_friction_numerator nexus.value 90
+execute if score #math_00 temp.value matches ..200 run scoreboard players set #collision_friction_numerator nexus.value 90
+execute if score #math_00 temp.value matches ..200 run scoreboard players set #friction_numerator nexus.value 95
+execute if score #math_00 temp.value matches 200.. run scoreboard players set #collision_friction_numerator nexus.value 95
+execute if score #math_00 temp.value matches 200.. run scoreboard players set #friction_numerator nexus.value 97
+
 scoreboard players set #fluid_friction_numerator nexus.value 70
-scoreboard players set #climb_friction_numerator nexus.value 95
-scoreboard players set #friction_numerator nexus.value 95
+scoreboard players set #climb_friction_numerator nexus.value 90
 scoreboard players set #friction_denominator nexus.value 100
 
-scoreboard players set #motion_climb_boolean nexus.value 1
+scoreboard players set #motion_climb_boolean nexus.value 2
 scoreboard players set #motion_destroy_boolean nexus.value 0
 scoreboard players set #motion_halt_boolean nexus.value 0
 scoreboard players set #motion_missed_ticks_boolean nexus.value 1
-scoreboard players set #motion_limit nexus.value 5000
+scoreboard players set #motion_limit nexus.value 4000
 
 execute positioned ~ ~1 ~ run function nexus:entity/generic/motion/hv/main
-
-
-
-
-
-
-
-# Apply upwards force if ball climbed
-
-execute if score #motion_climbed_boolean nexus.value matches 1 run scoreboard players add @s nexus.mot_y 250
 
 
 
@@ -66,36 +69,51 @@ scoreboard players operation #ball_z temp.value = @s nexus.z
 scoreboard players operation #ball_prev_x temp.value = @s nexus.prev_x
 scoreboard players operation #ball_prev_y temp.value = @s nexus.prev_y
 scoreboard players operation #ball_prev_z temp.value = @s nexus.prev_z
-scoreboard players operation #ball_size temp.value = @s nexus.size
+scoreboard players set #ball_size temp.value 600
 scoreboard players operation #ball_mass temp.value = @s nexus.mass
-scoreboard players set #ball_mot_x temp.value 0
-scoreboard players set #ball_mot_y temp.value 0
-scoreboard players set #ball_mot_z temp.value 0
-scoreboard players set #ball_ang_vel_x temp.value 0
-scoreboard players set #ball_ang_vel_y temp.value 0
-scoreboard players set #ball_ang_vel_z temp.value 0
+scoreboard players operation #ball_mot_x temp.value = @s nexus.mot_x
+scoreboard players operation #ball_mot_y temp.value = @s nexus.mot_y
+scoreboard players operation #ball_mot_z temp.value = @s nexus.mot_z
+scoreboard players operation #ball_ang_vel_x temp.value = @s nexus.ang_vel_x
+scoreboard players operation #ball_ang_vel_y temp.value = @s nexus.ang_vel_y
+scoreboard players operation #ball_ang_vel_z temp.value = @s nexus.ang_vel_z
 
-execute as @e[distance=..8,tag=nexus.entity.push,tag=!nexus.entity.target] unless entity @s[gamemode=spectator] run function temp:entity/ball/mode/roll/kick/main
+scoreboard players operation #ball_avg_x temp.value = #ball_x temp.value
+scoreboard players operation #ball_avg_y temp.value = #ball_y temp.value
+scoreboard players operation #ball_avg_z temp.value = #ball_z temp.value
+scoreboard players operation #ball_avg_x temp.value += #ball_prev_x temp.value
+scoreboard players operation #ball_avg_y temp.value += #ball_prev_y temp.value
+scoreboard players operation #ball_avg_z temp.value += #ball_prev_z temp.value
+scoreboard players operation #ball_avg_x temp.value /= #2 nexus.value
+scoreboard players operation #ball_avg_y temp.value /= #2 nexus.value
+scoreboard players operation #ball_avg_z temp.value /= #2 nexus.value
 
-execute if score #ball_mot_x temp.value matches ..-4000 run scoreboard players set #ball_mot_x temp.value -4000
-execute if score #ball_mot_y temp.value matches ..-4000 run scoreboard players set #ball_mot_y temp.value -4000
-execute if score #ball_mot_z temp.value matches ..-4000 run scoreboard players set #ball_mot_z temp.value -4000
-execute if score #ball_mot_x temp.value matches 04000.. run scoreboard players set #ball_mot_x temp.value 4000
-execute if score #ball_mot_y temp.value matches 04000.. run scoreboard players set #ball_mot_y temp.value 4000
-execute if score #ball_mot_z temp.value matches 04000.. run scoreboard players set #ball_mot_z temp.value 4000
-execute if score #ball_ang_vel_x temp.value matches ..-4000 run scoreboard players set #ball_ang_vel_x temp.value -4000
-execute if score #ball_ang_vel_y temp.value matches ..-4000 run scoreboard players set #ball_ang_vel_y temp.value -4000
-execute if score #ball_ang_vel_z temp.value matches ..-4000 run scoreboard players set #ball_ang_vel_z temp.value -4000
-execute if score #ball_ang_vel_x temp.value matches 04000.. run scoreboard players set #ball_ang_vel_x temp.value 4000
-execute if score #ball_ang_vel_y temp.value matches 04000.. run scoreboard players set #ball_ang_vel_y temp.value 4000
-execute if score #ball_ang_vel_z temp.value matches 04000.. run scoreboard players set #ball_ang_vel_z temp.value 4000
+scoreboard players set #apply_force temp.value 0
+execute unless score @s temp.kick_cooldown matches 1.. as @e[distance=..8,tag=nexus.entity.push,tag=!nexus.entity.target,sort=nearest] unless entity @s[gamemode=spectator] run function temp:entity/ball/mode/roll/kick/main
+execute if score @s temp.kick_cooldown matches 1.. as @e[type=area_effect_cloud,distance=..8,tag=temp.entity.type.ball,tag=!nexus.entity.target,sort=nearest] unless entity @s[gamemode=spectator] run function temp:entity/ball/mode/roll/kick/main
+execute if score #apply_force temp.value matches 1 run scoreboard players set @s temp.kick_cooldown 3
 
-scoreboard players operation @s nexus.mot_x += #ball_mot_x temp.value
-scoreboard players operation @s nexus.mot_y += #ball_mot_y temp.value
-scoreboard players operation @s nexus.mot_z += #ball_mot_z temp.value
-scoreboard players operation @s nexus.ang_vel_x += #ball_ang_vel_x temp.value
-scoreboard players operation @s nexus.ang_vel_y += #ball_ang_vel_y temp.value
-scoreboard players operation @s nexus.ang_vel_z += #ball_ang_vel_z temp.value
+scoreboard players operation @s nexus.mot_x = #ball_mot_x temp.value
+scoreboard players operation @s nexus.mot_y = #ball_mot_y temp.value
+scoreboard players operation @s nexus.mot_z = #ball_mot_z temp.value
+scoreboard players operation @s nexus.ang_vel_x = #ball_ang_vel_x temp.value
+scoreboard players operation @s nexus.ang_vel_y = #ball_ang_vel_y temp.value
+scoreboard players operation @s nexus.ang_vel_z = #ball_ang_vel_z temp.value
+
+execute if score @s nexus.mot_x matches ..-4000 run scoreboard players set @s nexus.mot_x -4000
+execute if score @s nexus.mot_y matches ..-4000 run scoreboard players set @s nexus.mot_y -4000
+execute if score @s nexus.mot_z matches ..-4000 run scoreboard players set @s nexus.mot_z -4000
+execute if score @s nexus.mot_x matches 04000.. run scoreboard players set @s nexus.mot_x 4000
+execute if score @s nexus.mot_y matches 04000.. run scoreboard players set @s nexus.mot_y 4000
+execute if score @s nexus.mot_z matches 04000.. run scoreboard players set @s nexus.mot_z 4000
+execute if score @s nexus.ang_vel_x matches ..-4000 run scoreboard players set @s nexus.ang_vel_x -4000
+execute if score @s nexus.ang_vel_y matches ..-4000 run scoreboard players set @s nexus.ang_vel_y -4000
+execute if score @s nexus.ang_vel_z matches ..-4000 run scoreboard players set @s nexus.ang_vel_z -4000
+execute if score @s nexus.ang_vel_x matches 04000.. run scoreboard players set @s nexus.ang_vel_x 4000
+execute if score @s nexus.ang_vel_y matches 04000.. run scoreboard players set @s nexus.ang_vel_y 4000
+execute if score @s nexus.ang_vel_z matches 04000.. run scoreboard players set @s nexus.ang_vel_z 4000
+
+scoreboard players remove @s[scores={temp.kick_cooldown=1..}] temp.kick_cooldown 1
 
 
 
@@ -166,4 +184,5 @@ scoreboard players operation @s nexus.mot_z += #output_vector_z nexus.value
 # Termination conditions
 
 execute if score #motion_fire_boolean nexus.value matches 1 at @s run function temp:entity/ball/mode/generic/terminate
-execute if score @s nexus.y matches ..-96000 at @s run function temp:entity/ball/mode/generic/terminate
+function nexus:entity/generic/void_check
+execute if score #void_boolean nexus.value matches 1 at @s run function temp:entity/ball/mode/generic/terminate

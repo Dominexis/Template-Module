@@ -50,5 +50,6 @@ execute if score @s nexus.health matches 1.. run function temp:entity/spider_bra
 
 # Start death mode
 
-execute if score @s nexus.y matches ..-96000 run function temp:entity/spider_brain/mode/generic/terminate
+function nexus:entity/generic/void_check
+execute if score #void_boolean nexus.value matches 1 run function temp:entity/spider_brain/mode/generic/terminate
 execute if score @s nexus.health matches ..0 run function temp:entity/spider_brain/mode/death/start

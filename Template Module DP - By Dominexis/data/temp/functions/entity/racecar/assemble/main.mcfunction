@@ -6,7 +6,7 @@ scoreboard players operation #input_angle_y nexus.value = @s nexus.yaw
 function nexus:generic/matrix/from_gimbal/3d/yaw_pitch
 function nexus:generic/matrix/push/3d
 
-scoreboard players set #input_vector_x nexus.value -700
+scoreboard players set #input_vector_x nexus.value 700
 scoreboard players set #input_vector_y nexus.value -1250
 scoreboard players set #input_vector_z nexus.value 700
 function nexus:generic/matrix/transform/direct/3d
@@ -18,7 +18,7 @@ scoreboard players operation #entity_y nexus.value += #output_vector_y nexus.val
 scoreboard players operation #entity_z nexus.value += #output_vector_z nexus.value
 execute as @e[type=area_effect_cloud,distance=..8,tag=temp.entity.part.wheel_front_left ,tag=nexus.entity.target,limit=1] run function nexus:entity/generic/data/set/fakeplayer/pos
 
-scoreboard players set #input_vector_x nexus.value 700
+scoreboard players set #input_vector_x nexus.value -700
 scoreboard players set #input_vector_y nexus.value -1250
 scoreboard players set #input_vector_z nexus.value 700
 function nexus:generic/matrix/transform/direct/3d
@@ -30,7 +30,7 @@ scoreboard players operation #entity_y nexus.value += #output_vector_y nexus.val
 scoreboard players operation #entity_z nexus.value += #output_vector_z nexus.value
 execute as @e[type=area_effect_cloud,distance=..8,tag=temp.entity.part.wheel_front_right,tag=nexus.entity.target,limit=1] run function nexus:entity/generic/data/set/fakeplayer/pos
 
-scoreboard players set #input_vector_x nexus.value -700
+scoreboard players set #input_vector_x nexus.value 700
 scoreboard players set #input_vector_y nexus.value -1250
 scoreboard players set #input_vector_z nexus.value -700
 function nexus:generic/matrix/transform/direct/3d
@@ -42,7 +42,7 @@ scoreboard players operation #entity_y nexus.value += #output_vector_y nexus.val
 scoreboard players operation #entity_z nexus.value += #output_vector_z nexus.value
 execute as @e[type=area_effect_cloud,distance=..8,tag=temp.entity.part.wheel_back_left  ,tag=nexus.entity.target,limit=1] run function nexus:entity/generic/data/set/fakeplayer/pos
 
-scoreboard players set #input_vector_x nexus.value 700
+scoreboard players set #input_vector_x nexus.value -700
 scoreboard players set #input_vector_y nexus.value -1250
 scoreboard players set #input_vector_z nexus.value -700
 function nexus:generic/matrix/transform/direct/3d
@@ -94,19 +94,23 @@ scoreboard players set #entity_pitch nexus.value 0
 scoreboard players set #entity_roll nexus.value 0
 execute as @e[type=armor_stand,distance=..8,tag=temp.entity.part.body,tag=nexus.entity.target,limit=1] run function nexus:entity/generic/data/set/fakeplayer/head
 
-scoreboard players operation #entity_pitch nexus.value = @s temp.wheel
-execute as @e[type=armor_stand,distance=..8,tag=temp.entity.part.wheel_back ,tag=nexus.entity.target] run function nexus:entity/generic/data/set/fakeplayer/head
+scoreboard players operation #entity_pitch nexus.value = @s temp.bl_wheel
+execute as @e[type=armor_stand,distance=..8,tag=temp.entity.part.wheel_back_left ,tag=nexus.entity.target] run function nexus:entity/generic/data/set/fakeplayer/head
+scoreboard players operation #entity_pitch nexus.value = @s temp.br_wheel
+execute as @e[type=armor_stand,distance=..8,tag=temp.entity.part.wheel_back_right,tag=nexus.entity.target] run function nexus:entity/generic/data/set/fakeplayer/head
 
 scoreboard players operation #entity_yaw nexus.value = @s temp.steer
-scoreboard players operation #entity_yaw nexus.value *= #3 nexus.value
 scoreboard players operation #entity_yaw nexus.value += @s nexus.yaw
-execute as @e[type=armor_stand,distance=..8,tag=temp.entity.part.wheel_front,tag=nexus.entity.target] run function nexus:entity/generic/data/set/fakeplayer/head
+scoreboard players operation #entity_pitch nexus.value = @s temp.fl_wheel
+execute as @e[type=armor_stand,distance=..8,tag=temp.entity.part.wheel_front_left ,tag=nexus.entity.target] run function nexus:entity/generic/data/set/fakeplayer/head
+scoreboard players operation #entity_pitch nexus.value = @s temp.fr_wheel
+execute as @e[type=armor_stand,distance=..8,tag=temp.entity.part.wheel_front_right,tag=nexus.entity.target] run function nexus:entity/generic/data/set/fakeplayer/head
 
 scoreboard players set #input_angle_x nexus.value 225
 scoreboard players operation #input_angle_y nexus.value = @s nexus.yaw
 scoreboard players operation #input_angle_z nexus.value = @s temp.steer
-scoreboard players operation #input_angle_z nexus.value *= #3 nexus.value
 scoreboard players operation #input_angle_z nexus.value *= #-1 nexus.value
+scoreboard players operation #input_angle_z nexus.value *= #2 nexus.value
 function nexus:generic/matrix/from_gimbal/3d/yaw_pitch_roll
 function nexus:generic/matrix/push/3d
 function nexus:generic/matrix/to_gimbal/3d/xyz

@@ -124,4 +124,12 @@ scoreboard players set #damage_amount nexus.value 1000
 scoreboard players set #damage_source nexus.value 999900001
 scoreboard players set #damage_armor_boolean nexus.value 1
 scoreboard players set #damage_burn_boolean nexus.value 0
-execute at @s as @a[distance=..1] run function nexus:player/health/damage/verify
+scoreboard players set #damage_shield_boolean nexus.value 1
+scoreboard players set #damage_shield_blocked_boolean nexus.value 0
+scoreboard players set #damage_attack_boolean nexus.value 0
+
+scoreboard players add @s nexus.attack_cooldown 0
+execute if score @s nexus.attack_cooldown matches ..0 at @s as @a[distance=..1] run function nexus:player/health/damage/verify
+
+execute if score #damage_attack_boolean nexus.value matches 1 run scoreboard players set @s nexus.attack_cooldown 10
+scoreboard players operation @s[scores={nexus.attack_cooldown=1..}] nexus.attack_cooldown -= #missed_ticks nexus.value

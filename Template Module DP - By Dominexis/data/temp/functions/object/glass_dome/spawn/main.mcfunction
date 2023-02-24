@@ -11,7 +11,7 @@ summon marker ~ ~ ~ {Tags:["nexus.object","temp.object","temp.object.type.glass_
 # Assign ID
 
 scoreboard players add #global nexus.id 1
-scoreboard players operation @e[type=marker,tag=nexus.object.target.spawn,limit=1] nexus.id = #global nexus.id
+scoreboard players operation @e[type=marker,distance=..1,tag=nexus.object.target.spawn,limit=1] nexus.id = #global nexus.id
 
 
 
@@ -21,7 +21,7 @@ scoreboard players operation @e[type=marker,tag=nexus.object.target.spawn,limit=
 
 # Assign scores
 
-execute as @e[type=marker,tag=nexus.object.target.spawn,limit=1] run function temp:object/glass_dome/spawn/scores
+execute as @e[type=marker,distance=..1,tag=nexus.object.target.spawn,limit=1] run function temp:object/glass_dome/spawn/scores
 
 
 
@@ -31,4 +31,4 @@ execute as @e[type=marker,tag=nexus.object.target.spawn,limit=1] run function te
 
 # Remove target tag
 
-tag @e[type=marker,tag=temp.object] remove nexus.object.target.spawn
+tag @e[type=marker,distance=..1,tag=temp.object] remove nexus.object.target.spawn

@@ -1,2 +1,2 @@
-# Initialize feature booleans
+# Initialize custom feature booleans
 
