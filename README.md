@@ -3,10 +3,15 @@ The Template Module is a module for Dom's Nexus that adds various functionality 
 
 # Using the features
 Each of the mobs and objects can be spawned by running a certain function in chat.
+
 Spider Brain: `/function temp:entity/spider_brain/spawn/main`
+
 Soccer Ball: `/function temp:entity/ball/spawn/main`
+
 Racecar: `/function temp:entity/racecar/spawn/main`
+
 Skull: `/function temp:entity/skull/spawn/main`
+
 Glass Dome: `/function temp:object/glass_dome/spawn/main`
 
 The Spider Brain and the Skull mobs can be killed like ordinary mobs. The Soccer Ball and the Racecar despawn when they touch fire or lava. The Glass Dome is a physical structure which spawns which can be broken normally.
