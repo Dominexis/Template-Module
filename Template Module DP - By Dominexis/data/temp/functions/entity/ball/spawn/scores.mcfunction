@@ -37,6 +37,7 @@ scoreboard players set @s nexus.ang_vel_z 0
 
 
 
+
 # Assign miscellaneous values
 
 scoreboard players set @s nexus.id_bool 1
